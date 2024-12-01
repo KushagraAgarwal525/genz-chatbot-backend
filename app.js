@@ -49,9 +49,7 @@ const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro', systemInstruct
 io.on('connection', (socket) => {
   // Start a new chat session with the prompt and user message
   const chat = model.startChat({
-    history: [
-      { role: "system", content: prompt }, // Ensure system instructions are sent
-    ]
+    history: []
   });
   // Handle user messages
   socket.on('user_message', async (message) => {
