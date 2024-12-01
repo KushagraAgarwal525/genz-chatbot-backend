@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 
 const corsOptions = {
-  origin: "https://brainrot-ai.vercel.app/",
+  origin: "brainrotai-production.up.railway.app",
   methods: ["GET", "POST"],
   credentials: true,
 };
@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 // Attach Socket.IO to the server
 const io = new Server(server, {
   cors: {
-    origin: "https://brainrot-ai.vercel.app", // Match frontend URL
+    origin: "brainrotai-production.up.railway.app", // Match frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },
