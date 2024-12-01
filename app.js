@@ -48,12 +48,9 @@ io.on('connection', (socket) => {
       });
 
       // Stream the response from the model
-      const result = await chat.sendMessageStream(message);
-
-      for await (const chunk of result.stream) {
-        const chunkText = chunk.text();
-        socket.emit('model_response', { text: chunkText }); // Stream response to client
-      }
+      const result = await chat.sendMessage(message);
+      const responseText = result.text();
+      socket.emit('model_response', { text: responseText }); // Send response to client
     } catch (error) {
       socket.emit('error', { message: 'Something went wrong. Please try again.' });
     }
