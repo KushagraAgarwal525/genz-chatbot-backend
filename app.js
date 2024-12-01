@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 
 const corsOptions = {
-  origin: "brainrotai-production.up.railway.app",
+  origin: process.env.PUBLIC_FRONTEND_URL,
   methods: ["GET", "POST"],
   credentials: true,
 };
@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 // Attach Socket.IO to the server
 const io = new Server(server, {
   cors: {
-    origin: "brainrotai-production.up.railway.app", // Match frontend URL
+    origin: process.env.PUBLIC_FRONTEND_URL, // Match frontend URL
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -71,4 +71,8 @@ io.on('connection', (socket) => {
   });
 });
 
-module.exports = server;
+const PORT = process.env.PORT || 8000; // Use PORT environment variable or fallback to 8000
+
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
